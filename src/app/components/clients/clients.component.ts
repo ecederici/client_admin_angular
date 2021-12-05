@@ -14,7 +14,7 @@ export class ClientsComponent implements OnInit {
   totalOwed: number;
   VAT: number;
   vat: number;
-
+  // This class should be refactored
   constructor(private clientService: ClientService,
               private settingsService: SettingsService) { }
 
