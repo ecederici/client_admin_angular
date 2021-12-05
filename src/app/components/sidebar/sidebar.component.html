@@ -1,0 +1,12 @@
+<a routerLink="client/add" class="btn btn-success btn-block mb-3">
+  <i class="fa fa-plus"></i> New
+</a>
+  <form (submit)="onSubmit()">
+    <label class="text-secondary">Value Added Tax:</label>
+    <div class="input-group">
+      <input type="text" name="balance" class="form-control" [(ngModel)]="vat">
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-primary">Calculate</button>
+      </span>
+    </div>
+  </form>

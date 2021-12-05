@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-md-6">
+    <a routerLink="/" class="btn btn-link">
+      <i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard
+    </a>
+  </div>
+  <div class="col-md-6">
+    <div class="pull-right">
+      <a routerLink="/client/edit/{{ id }}" class="btn btn-dark">
+        Edit
+      </a>
+      <button [disabled]="disableDeleteButton" class="btn btn-danger ml-2" data-toggle="modal" attr.data-target="#delete_category{{delete}}" [style.cursor]="!disableDeleteButton ? 'pointer' : ''">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
+<hr>
+<div *ngIf="client" class="card">
+  <h3 class="card-header">{{ client.first_name }} {{ client.last_name }}</h3>
+  <div class="card-body">
+    <div class="row">
+      <div class="cold-md-8 col-sm-6">
+        <h5>Client ID: {{ client.id }}</h5>
+      </div>
+      <div class="cold-md-8 col-sm-6">
+       <h3 class="pull-right">
+         Balance
+         <span
+           [class.text-danger]="hasBalance"
+           [class.text-success]="!hasBalance">
+           {{client.balance | currency:"USD":"symbol"}}
+         </span>
+         <small>
+           <a (click)="showBalanceUpdateInput = !showBalanceUpdateInput">
+             <i class="fa fa-pencil"></i>
+           </a>
+         </small>
+       </h3>
+        <div class="clearfix">
+          <form *ngIf="showBalanceUpdateInput" (submit)="updateBalance()">
+            <div class="input-group">
+              <input type="text" name="balance" class="form-control" [(ngModel)]="client.balance">
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-primary">Update</button>
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    <ul class="list-group">
+      <li class="list-group-item">Contact Email: {{ client.email }}</li>
+      <li class="list-group-item">Contact Phone: {{ client.phone }}</li>
+    </ul>
+  </div>
+</div>
+<div class="modal fade" id="delete_category" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+            <div class="row form-group text-center ml-2">
+              <span>Are you sure to delete?</span>
+            </div>
+            <div class="row form-group">
+              <div class="ml-auto mr-3">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" (click)='removeClient()' data-dismiss="modal">Delete</button>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
+</div>
+
